@@ -1,18 +1,24 @@
-import { createStore } from 'redux';
-import reducer from './redux/companyReducer';
-import initialState from './redux/initialAppState';
-import { postCompanies, updateCompany, deleteCompany } from './redux/app/company';
+import React from 'react';
+import { render } from 'react-dom';
+import { Provider } from 'react-redux';
+import * as companyActions from './redux/actions/companyActions'
+import {default as store}  from './redux/store/store.js';
 
-const store = createStore(reducer, initialState);
+import App from './components/App';
 
-console.log(initialState);
-console.log('state is: ', store.getState());
+render((
+  <Provider store={store}>
+    <App />
+  </Provider>
+), document.getElementById('app'));
 
-store.subscribe(() => console.log('curent state is: ', store.getState()));
 
-store.dispatch(postCompanies(
-  {
-    payload: [
+function run() {
+  console.log('state is: ', store.getState());
+  // store.subscribe(() => console.log('current state is: ', store.getState()));
+
+  store.dispatch(companyActions.POST_COMPANIES(
+    [
       {
         id: 1,
         companyName: 'Main LTD',
@@ -25,18 +31,27 @@ store.dispatch(postCompanies(
         earnings: 1000,
       },
     ],
-  },
-));
+  ));
 
-store.dispatch(updateCompany(
-  {
-    payload: {
+  store.dispatch(companyActions.UPDATE_COMPANY(
+    {
       id: 2,
       companyName: 'Second New Name LTD',
     },
-  },
-));
+  ));
 
-store.dispatch(deleteCompany(
-  { id: 1 },
-));
+  store.dispatch(companyActions.DELETE_COMPANY(
+    {
+      id: 1
+    },
+  ));
+
+}
+
+if (module.hot) {
+  module.hot.accept('./app.js', () => {
+    setTimeout(run());
+  })
+}
+
+run();
