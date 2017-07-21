@@ -1,5 +1,11 @@
 import * as Constants from '../../constants/companyConstants';
 
+export function GET_COMPANIES() {
+  return {
+    type: 'GET_COMPANIES',
+  }
+}
+
 export function POST_COMPANIES(list) {
   return {
     type: Constants.POST_COMPANIES,

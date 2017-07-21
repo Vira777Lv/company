@@ -1,17 +1,24 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { Row, Col, Well, Button } from 'react-bootstrap';
 
 
 function CompanyItem(props) {
   const { name, earnings } = props;
-  console.log(props);
   return (
-    <li>
-      <div>
-        <h2>Company name: {name}</h2>
-        <p>Earnings: {earnings}</p>
-      </div>
-    </li>
+    <Well>
+      <Row>
+        <Col md={4}>
+          <li>
+            <div>
+              <h2>Company name:{name}</h2>
+              <p>Earnings: {earnings}</p>
+              <Button bsStyle="primary" style={{marginTop: '10px'}}>Load more...</Button>
+            </div>
+          </li>
+        </Col>
+      </Row>
+    </Well>
   );
 }
 

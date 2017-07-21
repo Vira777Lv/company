@@ -15,36 +15,36 @@ render((
 
 function run() {
   console.log('state is: ', store.getState());
-  // store.subscribe(() => console.log('current state is: ', store.getState()));
-
   store.dispatch(companyActions.POST_COMPANIES(
     [
       {
         id: 1,
         companyName: 'Main LTD',
         mainCompany: true,
-        earnings: 120000,
+        earnings: 150000,
       },
       {
         id: 2,
         companyName: 'Second LTD',
         earnings: 1000,
+        mainCompany: true,
       },
     ],
   ));
-
-  store.dispatch(companyActions.UPDATE_COMPANY(
-    {
-      id: 2,
-      companyName: 'Second New Name LTD',
-    },
-  ));
-
-  store.dispatch(companyActions.DELETE_COMPANY(
-    {
-      id: 1
-    },
-  ));
+  //
+  // store.dispatch(companyActions.UPDATE_COMPANY(
+  //   {
+  //     id: 2,
+  //     companyName: 'Second New Name LTD',
+  //     mainCompany: true,
+  //   },
+  // ));
+  //
+  // store.dispatch(companyActions.DELETE_COMPANY(
+  //   {
+  //     id: 1
+  //   },
+  // ));
 
 }
 
